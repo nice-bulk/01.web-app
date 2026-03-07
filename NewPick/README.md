@@ -45,6 +45,20 @@ pnpm install
 cd server && npm install && cd ..
 ```
 
+### 環境変数の設定
+
+`.env.example` をコピーして `.env` を作成し、APIキーを設定してください。
+
+```bash
+cp .env.example .env
+```
+
+```env
+VITE_GEMINI_API_KEY=your_gemini_api_key_here
+```
+
+> `.env` は `.gitignore` に含まれているため、Git にコミットされません。
+
 ### 起動
 
 ```bash
@@ -67,10 +81,9 @@ pnpm build
 
 ## 使い方
 
-1. **Gemini API Key** 欄に取得したAPIキーを入力（入力後は自動保存）
-2. **銘柄コード / 銘柄名** 欄に検索したい銘柄を入力（例: `7203` / `トヨタ自動車`）
-3. **同業界ランキング検索** または **同ポテンシャル銘柄検索** ボタンをクリック
-4. 結果は ⭐ でお気に入り登録、📥 で CSV 出力が可能
+1. **銘柄コード / 銘柄名** 欄に検索したい銘柄を入力（例: `7203` / `トヨタ自動車`）
+2. **同業界ランキング検索** または **同ポテンシャル銘柄検索** ボタンをクリック
+3. 結果は ⭐ でお気に入り登録、📥 で CSV 出力が可能
 
 ---
 
@@ -82,7 +95,7 @@ NewPick/
 │   ├── App.tsx          # メインコンポーネント・UI全体
 │   ├── gemini.ts        # Gemini API 呼び出しロジック
 │   ├── stockPrice.ts    # 株価取得（サーバー経由）
-│   ├── storage.ts       # 履歴・お気に入り・APIキーの永続化
+│   ├── storage.ts       # 履歴・お気に入りの永続化（localStorage）
 │   └── export.ts        # CSV エクスポート処理
 ├── server/
 │   └── index.js         # Express サーバー（Yahoo Finance プロキシ）
