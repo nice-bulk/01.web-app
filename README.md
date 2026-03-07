@@ -1,4 +1,4 @@
-# WebApp 🛠️
+# web-app 🛠️
 
 **Claude Desktop + Serena MCP** を使ったバイブコーディングで開発したアプリ集です。
 
