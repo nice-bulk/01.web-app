@@ -18,21 +18,7 @@ export interface FavoriteEntry {
 
 const HISTORY_KEY = 'newpick_history';
 const FAVORITES_KEY = 'newpick_favorites';
-const API_KEY_KEY = 'newpick_apikey';
 const MAX_HISTORY = 30;
-
-// --- API Key ---
-export function loadApiKey(): string {
-  try { return localStorage.getItem(API_KEY_KEY) ?? ''; }
-  catch { return ''; }
-}
-
-export function saveApiKey(key: string): void {
-  try {
-    if (key) localStorage.setItem(API_KEY_KEY, key);
-    else localStorage.removeItem(API_KEY_KEY);
-  } catch { /* noop */ }
-}
 
 // --- 検索履歴 ---
 export function loadHistory(): HistoryEntry[] {

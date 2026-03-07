@@ -39,7 +39,9 @@ export interface GeminiResponse {
 
 const GEMINI_API_BASE = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent';
 
-async function callGemini(apiKey: string, prompt: string): Promise<string> {
+async function callGemini(prompt: string): Promise<string> {
+  const apiKey = import.meta.env.VITE_GEMINI_API_KEY as string;
+  if (!apiKey) throw new Error('VITE_GEMINI_API_KEY が設定されていません（.env ファイルを確認してください）');
   const res = await fetch(`${GEMINI_API_BASE}?key=${apiKey}`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -62,7 +64,6 @@ async function callGemini(apiKey: string, prompt: string): Promise<string> {
 }
 
 export async function fetchIndustryRanking(
-  apiKey: string,
   ticker: string
 ): Promise<GeminiResponse> {
   const prompt = `
@@ -93,7 +94,7 @@ rankingsには最大10銘柄を含めてください。入力銘柄自身も含�
 必ず有効なJSONのみ返してください。
 `;
 
-  const raw = await callGemini(apiKey, prompt);
+  const raw = await callGemini(prompt);
   try {
     const cleaned = raw.replace(/```json\n?|\n?```/g, '').trim();
     return JSON.parse(cleaned);
@@ -103,7 +104,6 @@ rankingsには最大10銘柄を含めてください。入力銘柄自身も含�
 }
 
 export async function fetchSimilarStocks(
-  apiKey: string,
   ticker: string
 ): Promise<GeminiResponse> {
   const prompt = `
@@ -147,7 +147,7 @@ similarityは0〜100の整数で類似度を表してください（100が最も
 必ず有効なJSONのみ返してください。
 `;
 
-  const raw = await callGemini(apiKey, prompt);
+  const raw = await callGemini(prompt);
   try {
     const cleaned = raw.replace(/```json\n?|\n?```/g, '').trim();
     return JSON.parse(cleaned);

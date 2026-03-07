@@ -15,8 +15,6 @@ import {
   loadFavorites,
   toggleFavorite,
   isFavorite,
-  loadApiKey,
-  saveApiKey,
   type HistoryEntry,
   type FavoriteEntry,
 } from './storage';
@@ -27,7 +25,6 @@ type Tab = 'ranking' | 'similar';
 type SidePanel = 'history' | 'favorites' | null;
 
 function App() {
-  const [apiKey, setApiKey] = useState(() => loadApiKey());
   const [ticker, setTicker] = useState('');
   const [activeTab, setActiveTab] = useState<Tab>('ranking');
   const [rankingResult, setRankingResult] = useState<GeminiResponse | null>(null);
@@ -35,7 +32,6 @@ function App() {
   const [loadingRanking, setLoadingRanking] = useState(false);
   const [loadingSimilar, setLoadingSimilar] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [showApiKey, setShowApiKey] = useState(false);
   const [sidePanel, setSidePanel] = useState<SidePanel>(null);
   const [history, setHistory] = useState<HistoryEntry[]>([]);
   const [favorites, setFavorites] = useState<FavoriteEntry[]>([]);
@@ -51,13 +47,12 @@ function App() {
   const currentResult = activeTab === 'ranking' ? rankingResult : similarResult;
 
   const handleRanking = async () => {
-    if (!apiKey.trim()) { setError('Gemini APIキーを入力してください'); return; }
     if (!ticker.trim()) { setError('銘柄コードまたは銘柄名を入力してください'); return; }
     setError(null);
     setLoadingRanking(true);
     setActiveTab('ranking');
     try {
-      const result = await fetchIndustryRanking(apiKey, ticker);
+      const result = await fetchIndustryRanking(ticker);
       setRankingResult(result);
       // 銘柄コードを抽出して株価を取得
       if (result.rankings?.length) {
@@ -80,13 +75,12 @@ function App() {
   };
 
   const handleSimilar = async () => {
-    if (!apiKey.trim()) { setError('Gemini APIキーを入力してください'); return; }
     if (!ticker.trim()) { setError('銘柄コードまたは銘柄名を入力してください'); return; }
     setError(null);
     setLoadingSimilar(true);
     setActiveTab('similar');
     try {
-      const result = await fetchSimilarStocks(apiKey, ticker);
+      const result = await fetchSimilarStocks(ticker);
       setSimilarResult(result);
       const updated = addHistory({
         ticker: result.inputStockName || ticker,
@@ -179,29 +173,6 @@ function App() {
           {/* Input Panel */}
           <section className="input-panel">
             <div className="input-row">
-              <div className="input-group" style={{ flex: 1 }}>
-                <label className="input-label">
-                  <span className="label-icon">🔑</span>Gemini API Key
-                </label>
-                <div className="input-wrap">
-                  <input
-                    type={showApiKey ? 'text' : 'password'}
-                    className="input-field"
-                    placeholder="AIza..."
-                    value={apiKey}
-                    onChange={e => { setApiKey(e.target.value); saveApiKey(e.target.value); }}
-                  />
-                  <button className="toggle-btn" onClick={() => setShowApiKey(v => !v)}>
-                    {showApiKey ? '🙈' : '👁️'}
-                  </button>
-                </div>
-                <p className="input-hint">
-                  {apiKey
-                    ? <><span className="hint-saved">✅ APIキーを保存済み</span> · <span className="hint-clear" onClick={() => { setApiKey(''); saveApiKey(''); }}>削除</span></>
-                    : <><a href="https://aistudio.google.com/app/apikey" target="_blank" rel="noreferrer">Google AI Studio</a> で無料取得</>
-                  }
-                </p>
-              </div>
               <div className="input-group" style={{ flex: 1 }}>
                 <label className="input-label">
                   <span className="label-icon">📈</span>銘柄コード / 銘柄名
