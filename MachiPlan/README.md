@@ -100,6 +100,81 @@ MachiPlan/
 
 ---
 
+## バイブコーディング環境
+
+本プロジェクトは **Claude Desktop + Serena MCP** を使ったバイブコーディングで開発されました。
+
+### 使用ツール
+
+| ツール | 役割 |
+|---|---|
+| [Claude Desktop](https://claude.ai/download) | AIコーディングアシスタント（チャットUI） |
+| [Serena](https://github.com/oraios/serena) | Claude用MCPサーバー。ファイル読み書き・シンボル検索・プロジェクト記憶などコードベース操作を提供 |
+
+### 環境構築手順
+
+#### 1. Claude Desktop のインストール
+
+[claude.ai/download](https://claude.ai/download) からインストールします。
+
+#### 2. Serena のセットアップ
+
+```bash
+# uv（Pythonパッケージマネージャ）が必要
+# インストールされていない場合:
+# https://docs.astral.sh/uv/getting-started/installation/
+
+# Serena をクローン
+git clone https://github.com/oraios/serena
+cd serena
+```
+
+#### 3. Claude Desktop に Serena を登録
+
+Claude Desktop の設定ファイル（`claude_desktop_config.json`）に以下を追加します。
+
+**設定ファイルの場所:**
+- Windows: `%APPDATA%\Claude\claude_desktop_config.json`
+- macOS: `~/Library/Application Support/Claude/claude_desktop_config.json`
+
+```json
+{
+  "mcpServers": {
+    "serena": {
+      "command": "uvx",
+      "args": [
+        "--from", "git+https://github.com/oraios/serena",
+        "serena-mcp-server",
+        "--context", "desktop-app",
+        "--project-directory", "C:/Users/yourname/app-dev"
+      ]
+    }
+  }
+}
+```
+
+> `--project-directory` は自分のプロジェクトフォルダに合わせて変更してください。
+
+#### 4. プロジェクトをSerenaに登録
+
+Claude Desktop を再起動後、チャットで以下のように話しかけるとプロジェクトが認識されます：
+
+```
+serenaを使って C:\Users\yourname\app-dev\MachiPlan を開いて
+```
+
+#### 5. 開発の始め方
+
+あとは Claude に自然言語で指示するだけです。
+
+```
+# 例
+「観光スポットにレーティング表示を追加して」
+「PDFエクスポートで改ページがカードの途中にならないよう修正して」
+```
+
+---
+
 ## 注意事項
 
 > 本ツールの観光プランはAIによる自動生成です。営業時間・料金・アクセスは変わる場合があるため、  
