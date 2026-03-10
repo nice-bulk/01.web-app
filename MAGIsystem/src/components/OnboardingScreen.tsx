@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import type { QuizAnswer } from '../types'
 import { QUIZ_QUESTIONS } from '../constants'
 
@@ -21,13 +21,16 @@ const C = {
   serif: '"Noto Serif JP", serif',
 }
 
+// A=0, B=1, C=2, D=3 のマッピング
+const KEY_MAP: Record<string, number> = { a: 0, b: 1, c: 2, d: 3 }
+
 export default function OnboardingScreen({ onComplete }: Props) {
   const [currentQ, setCurrentQ] = useState(0)
   const [answers, setAnswers] = useState<QuizAnswer[]>([])
   const [selected, setSelected] = useState<number | null>(null)
 
   const question = QUIZ_QUESTIONS[currentQ]
-  const progress = ((currentQ) / QUIZ_QUESTIONS.length) * 100
+  const progress = (currentQ / QUIZ_QUESTIONS.length) * 100
 
   function handleNext() {
     if (selected === null) return
@@ -41,6 +44,30 @@ export default function OnboardingScreen({ onComplete }: Props) {
       onComplete(newAnswers)
     }
   }
+
+  // キーボード操作
+  useEffect(() => {
+    const handler = (e: KeyboardEvent) => {
+      const key = e.key.toLowerCase()
+
+      // A/B/C/D で選択
+      if (key in KEY_MAP) {
+        const idx = KEY_MAP[key]
+        if (idx < question.options.length) {
+          setSelected(idx)
+        }
+        return
+      }
+
+      // Enter で次へ
+      if (key === 'enter' && selected !== null) {
+        handleNext()
+      }
+    }
+    window.addEventListener('keydown', handler)
+    return () => window.removeEventListener('keydown', handler)
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selected, currentQ, answers, question])
 
   return (
     <div style={{ minHeight: '100vh', background: C.bg, display: 'flex', flexDirection: 'column', fontFamily: C.font }}>
@@ -94,13 +121,21 @@ export default function OnboardingScreen({ onComplete }: Props) {
                   fontFamily: C.font,
                 }}
               >
-                <span style={{ color: selected === i ? C.orange : '#333', fontSize: '12px', marginTop: '2px', whiteSpace: 'nowrap' }}>[{opt.label}]</span>
-                <span style={{ color: selected === i ? C.bright : '#888', fontSize: '13px' }}>{opt.text}</span>
+                <span style={{ color: selected === i ? C.orange : '#444', fontSize: '12px', marginTop: '2px', whiteSpace: 'nowrap' }}>
+                  [{opt.label}]
+                </span>
+                <span style={{ color: selected === i ? C.bright : '#888', fontSize: '13px' }}>
+                  {opt.text}
+                </span>
               </button>
             ))}
           </div>
 
-          <div style={{ marginTop: '32px', display: 'flex', justifyContent: 'flex-end' }}>
+          {/* キーヒント + NEXTボタン */}
+          <div style={{ marginTop: '32px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <div style={{ color: '#333', fontSize: '11px', letterSpacing: '0.15em' }}>
+              A / B / C / D で選択　　Enter で次へ
+            </div>
             <button
               onClick={handleNext}
               disabled={selected === null}

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 interface Props {
   onComplete: () => void
@@ -96,6 +96,21 @@ export default function BootScreen({ onComplete }: Props) {
   const [lines, setLines] = useState<string[]>([])
   const [done, setDone] = useState(false)
   const [btnHover, setBtnHover] = useState(false)
+  const bottomRef = useRef<HTMLDivElement>(null)
+
+  // Enterキーで次へ
+  useEffect(() => {
+    const handler = (e: KeyboardEvent) => {
+      if (e.key === 'Enter' && done) onComplete()
+    }
+    window.addEventListener('keydown', handler)
+    return () => window.removeEventListener('keydown', handler)
+  }, [done, onComplete])
+
+  // ログ追加のたびに最下部へ自動スクロール
+  useEffect(() => {
+    bottomRef.current?.scrollIntoView({ behavior: 'smooth' })
+  }, [lines])
 
   useEffect(() => {
     let i = 0
@@ -138,6 +153,7 @@ export default function BootScreen({ onComplete }: Props) {
             </div>
           ))}
           {!done && <div style={{ color: '#ff6600' }}>█</div>}
+          <div ref={bottomRef} />
         </div>
 
         {done && (
@@ -157,7 +173,7 @@ export default function BootScreen({ onComplete }: Props) {
             >
               ENTER SYSTEM
             </button>
-            <div style={S.hint}>[ PRESS TO INITIATE PERSONALITY PROFILING ]</div>
+            <div style={S.hint}>[ CLICK OR PRESS ENTER TO INITIATE PERSONALITY PROFILING ]</div>
           </div>
         )}
       </div>

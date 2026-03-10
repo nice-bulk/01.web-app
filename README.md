@@ -10,7 +10,7 @@
 |---|---|
 | [MAGI SYSTEM](./MAGIsystem) | エヴァンゲリオンのMAGIシステムを模した、AI合議型意思決定Webアプリ |
 | [NewPick](./NewPick) | 日本株 ポテンシャル分析ツール。銘柄コード・銘柄名から同業界ランキングや類似銘柄をAIが分析 |
-| [MachiPlan](./MachiPlan) | 日本国内 AIかんたん観光プランナー。町名と予算を入力するだけで一日の観光プランを自動生成 |
+| [MachiPlan](./MachiPlan) | 日本国内 AIかんたん観光プランナー。町名と予算を入力するだけで一日の観光プランを自動生成・PDF出力 |
 
 ---
 
@@ -123,7 +123,7 @@ serenaを使って C:\Users\yourname\app-dev\my-app を開いて
 
 各プロジェクトをクローン後、以下の手順で起動できます。
 ```bash
-cd NewPick  # または MachiPlan
+cd NewPick  # または MachiPlan, MAGIsystem
 
 # 依存関係インストール
 pnpm install
@@ -138,6 +138,19 @@ pnpm dev
 
 > Gemini API キーは [Google AI Studio](https://aistudio.google.com/app/apikey) で無料取得できます。
 
+### NewPick のみ：バックエンドサーバーの起動
+
+NewPick は株価データ取得のために Express サーバーが必要です。別ターミナルで起動してください。
+```bash
+cd NewPick/server
+
+# 依存関係インストール
+npm install
+
+# サーバー起動
+npm run dev
+```
+
 ---
 
 ## 共通技術スタック
@@ -149,3 +162,10 @@ pnpm dev
 | AI | Google Gemini API (`gemini-2.5-flash`) |
 | APIキー管理 | `.env` ファイル（Gitに含まれない） |
 | コーディング環境 | Claude Desktop + Serena MCP |
+
+## プロジェクト固有の技術
+
+| プロジェクト | 追加ライブラリ |
+|---|---|
+| NewPick | Express + yahoo-finance2（株価取得バックエンド） |
+| MachiPlan | html2canvas + jsPDF（PDF出力機能） |
