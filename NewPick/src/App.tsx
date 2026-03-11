@@ -341,8 +341,8 @@ function RankingTable({
             <th>順位</th><th>コード</th><th>銘柄名</th>
             <th className="num-col">時価総額</th>
             <th className="num-col">現在株価 <span className="col-hint">※15分遅延</span></th>
-            <th className="num-col">目標株価 <span className="col-hint">※AI推定</span></th>
-            <th className="num-col">PER</th>
+            <th className="num-col">目標株価 <span className="col-hint">※アナリスト平均</span></th>
+            <th className="num-col">PER <span className="col-hint">実績</span></th>
             <th className="num-col">PBR</th>
           </tr>
         </thead>
@@ -368,9 +368,33 @@ function RankingTable({
                     <span className="value-current">{formatPrice(quote.currentPrice)}</span>
                   )}
                 </td>
-                <td className="num-col"><span className="value-accent">{item.targetPrice}</span></td>
-                <td className="num-col">{item.per}</td>
-                <td className="num-col">{item.pbr}</td>
+                <td className="num-col">
+                  {quote === undefined ? (
+                    <span className="value-loading">取得中...</span>
+                  ) : quote?.targetPrice != null ? (
+                    <span className="value-accent">{formatPrice(quote.targetPrice)}</span>
+                  ) : (
+                    <span className="value-na">{item.targetPrice}</span>
+                  )}
+                </td>
+                <td className="num-col">
+                  {quote === undefined ? (
+                    <span className="value-loading">取得中...</span>
+                  ) : quote?.trailingPE != null ? (
+                    <span>{quote.trailingPE.toFixed(1)}x</span>
+                  ) : (
+                    <span className="value-na">{item.per}</span>
+                  )}
+                </td>
+                <td className="num-col">
+                  {quote === undefined ? (
+                    <span className="value-loading">取得中...</span>
+                  ) : quote?.priceToBook != null ? (
+                    <span>{quote.priceToBook.toFixed(2)}x</span>
+                  ) : (
+                    <span className="value-na">{item.pbr}</span>
+                  )}
+                </td>
               </tr>
             );
           })}

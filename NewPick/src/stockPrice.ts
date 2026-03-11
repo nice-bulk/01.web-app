@@ -5,6 +5,10 @@ const SERVER_BASE = 'http://localhost:3001';
 export interface StockQuote {
   currentPrice: number;
   previousClose: number;
+  targetPrice: number | null;   // アナリスト平均目標株価
+  trailingPE:  number | null;   // 実績PER
+  forwardPE:   number | null;   // 予想PER
+  priceToBook: number | null;   // PBR
 }
 
 // 複数銘柄の株価を一括取得
