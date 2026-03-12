@@ -2,6 +2,8 @@
 
 > エヴァンゲリオンのMAGIシステムを模した、AI合議型意思決定Webアプリ
 
+🌐 **デモサイト**: https://magisystem-seven.vercel.app/
+
 ---
 
 ## 概要
