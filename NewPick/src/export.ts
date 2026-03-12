@@ -30,7 +30,7 @@ function downloadCsv(csv: string, filename: string): void {
 export function exportRankingCsv(
   items: StockRankingItem[],
   stockName: string,
-  industry: string
+  _industry: string
 ): void {
   const headers = ['順位', '証券コード', '銘柄名', '時価総額', '目標株価', 'PER', 'PBR'];
   const rows = items.map(item => [
