@@ -76,6 +76,22 @@ body {
   letter-spacing: 0.1em;
 }
 
+.demo-badge {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--ink);
+  background: var(--accent-light);
+  border-radius: 6px;
+  padding: 4px 10px;
+  animation: pulse-badge 2.5s ease-in-out infinite;
+}
+
+@keyframes pulse-badge {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.65; }
+}
+
 /* ===== Main ===== */
 .app-main {
   max-width: 760px;

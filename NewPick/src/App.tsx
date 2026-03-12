@@ -146,6 +146,9 @@ function App() {
             <span className="logo-text">ew<span className="logo-accent">Pick</span></span>
           </div>
           <p className="header-subtitle">日本株 ポテンシャル分析ツール</p>
+          {!import.meta.env.VITE_GEMINI_API_KEY && (
+            <span className="demo-badge">DEMO MODE</span>
+          )}
           <div className="header-actions">
             <button
               className={`header-icon-btn ${sidePanel === 'history' ? 'active' : ''}`}

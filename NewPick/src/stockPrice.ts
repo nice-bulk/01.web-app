@@ -1,4 +1,5 @@
 // Yahoo Finance バックエンドから株価を取得するユーティリティ
+import { mockFetchQuotes } from './mockData';
 
 const SERVER_BASE = 'http://localhost:3001';
 
@@ -15,6 +16,11 @@ export interface StockQuote {
 export async function fetchQuotes(
   tickers: string[]
 ): Promise<Record<string, StockQuote | null>> {
+  // APIキーがない場合はモック株価を返す（デモ環境用）
+  if (!import.meta.env.VITE_GEMINI_API_KEY) {
+    return mockFetchQuotes(tickers);
+  }
+
   try {
     const res = await fetch(`${SERVER_BASE}/api/quotes`, {
       method: 'POST',

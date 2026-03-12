@@ -1,4 +1,5 @@
 import type { TourPlan } from '../types/plan';
+import { mockGenerateTourPlan } from './mockData';
 
 const GEMINI_API_URL =
   'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent';
@@ -8,7 +9,11 @@ export async function generateTourPlan(
   budget: number
 ): Promise<TourPlan> {
   const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
-  if (!apiKey) throw new Error('VITE_GEMINI_API_KEY が設定されていません');
+
+  // APIキーがない場合はモックデータを返す（デモ環境用）
+  if (!apiKey) {
+    return mockGenerateTourPlan(town, budget);
+  }
 
   const prompt = `
 あなたは日本国内の観光プランナーです。

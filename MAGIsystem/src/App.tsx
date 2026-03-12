@@ -78,6 +78,25 @@ export default function App() {
 
   return (
     <>
+      {!import.meta.env.VITE_GEMINI_API_KEY && (
+        <div style={{
+          position: 'fixed', top: 0, left: 0, right: 0, zIndex: 9999,
+          background: 'rgba(5,5,5,0.85)', backdropFilter: 'blur(4px)',
+          borderBottom: '1px solid #ff660044',
+          padding: '6px 24px',
+          display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '16px',
+          fontFamily: '"Share Tech Mono", monospace',
+        }}>
+          <span style={{
+            color: '#050505', background: '#ff6600',
+            fontSize: '10px', fontWeight: 'bold', letterSpacing: '0.2em',
+            padding: '2px 10px', animation: 'pulse-demo 2.5s ease-in-out infinite',
+          }}>DEMO MODE</span>
+          <span style={{ color: '#555', fontSize: '11px', letterSpacing: '0.12em' }}>
+            API KEY NOT CONFIGURED — RUNNING ON MOCK DATA
+          </span>
+        </div>
+      )}
       {phase === 'boot' && (
         <BootScreen onComplete={() => setPhase('home')} />
       )}

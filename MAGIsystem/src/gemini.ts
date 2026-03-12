@@ -1,4 +1,5 @@
 import type { QuizAnswer, PersonalityProfile, MagiVerdict } from './types'
+import { mockGeneratePersonalities, mockRunMagiJudgment } from './mockData'
 
 const GEMINI_API_URL =
   'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent'
@@ -33,6 +34,11 @@ async function callGemini(prompt: string): Promise<string> {
 }
 
 export async function generatePersonalities(answers: QuizAnswer[]): Promise<PersonalityProfile[]> {
+  // APIキーがない場合はモックデータを返す（デモ環境用）
+  if (!import.meta.env.VITE_GEMINI_API_KEY) {
+    return mockGeneratePersonalities(answers)
+  }
+
   const answerSummary = answers.map(a => `Q${a.questionId}: ${a.answer}`).join('\n')
 
   const prompt = `
@@ -111,6 +117,11 @@ export async function runMagiJudgment(
   magiName: string,
   _onChunk?: (text: string) => void,
 ): Promise<MagiVerdict> {
+  // APIキーがない場合はモックデータを返す（デモ環境用）
+  if (!import.meta.env.VITE_GEMINI_API_KEY) {
+    return mockRunMagiJudgment(agenda, personality, magiName, _onChunk)
+  }
+
   const prompt = `
 ${personality.systemPrompt}
 

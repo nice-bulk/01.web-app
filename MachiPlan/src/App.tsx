@@ -50,6 +50,9 @@ function App() {
               <p className="logo-sub">AI観光プランナー</p>
             </div>
           </div>
+          {!import.meta.env.VITE_GEMINI_API_KEY && (
+            <span className="demo-badge">DEMO MODE</span>
+          )}
         </div>
       </header>
 
