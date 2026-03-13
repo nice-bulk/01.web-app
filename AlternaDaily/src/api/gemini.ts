@@ -6,16 +6,6 @@ const GEMINI_API_URL =
 /** APIキーが未設定の場合はデモモード（モックデータ）で動作する */
 export const isDemoMode = !import.meta.env.VITE_GEMINI_API_KEY;
 
-function categoryLabel(category: MissionCategory): string {
-  const map: Record<MissionCategory, string> = {
-    action: '行動系',
-    experience: '体験系',
-    thinking: '思考系',
-    social: '人間関係系',
-  };
-  return map[category];
-}
-
 function timeCostLabel(t: UserProfile['difficulty']['timeCost']): string {
   return { '5min': '5分程度', '30min': '30分程度', halfday: '半日程度' }[t];
 }
@@ -104,7 +94,7 @@ export async function generateMission(profile: UserProfile, date: string): Promi
 }
 
 // APIキーなし環境用モック
-export async function mockGenerateMission(profile: UserProfile, date: string): Promise<Mission> {
+export async function mockGenerateMission(_profile: UserProfile, date: string): Promise<Mission> {
   await new Promise((resolve) => setTimeout(resolve, 1200));
 
   const samples: Array<Omit<Mission, 'id' | 'date' | 'isRerolled'>> = [
