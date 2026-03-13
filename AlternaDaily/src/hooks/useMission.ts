@@ -8,7 +8,7 @@ import {
   getStreak,
   getTodayDateString,
 } from '../utils/storage';
-import type { Mission, MissionRecord, UserProfile } from '../types/mission';
+import type { Mission, UserProfile } from '../types/mission';
 
 export type MissionState =
   | 'loading'

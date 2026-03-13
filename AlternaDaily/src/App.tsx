@@ -12,6 +12,16 @@ import './App.css';
 
 type Tab = 'home' | 'history' | 'settings';
 
+const TIME_COST_LABEL: Record<string, string> = {
+  '5min': '5分程度', '30min': '30分程度', halfday: '半日程度',
+};
+const MOVEMENT_LABEL: Record<string, string> = {
+  home: '家でできる', nearby: '近所で完結', anywhere: 'どこでもOK',
+};
+const BARRIER_LABEL: Record<string, string> = {
+  solo: '一人でできる', courage: '少し勇気がいる', social: '知らない人が関わる',
+};
+
 export default function App() {
   const [profile, setProfile] = useState<UserProfile | null>(null);
   const [tab, setTab] = useState<Tab>('home');
@@ -179,7 +189,7 @@ export default function App() {
                       <div>
                         <p className="side-item-label">時間コスト</p>
                         <p className="side-item-value">
-                          {{ '5min': '5分程度', '30min': '30分程度', halfday: '半日程度' }[profile.difficulty.timeCost]}
+                          {TIME_COST_LABEL[profile.difficulty.timeCost]}
                         </p>
                       </div>
                     </div>
@@ -188,7 +198,7 @@ export default function App() {
                       <div>
                         <p className="side-item-label">移動コスト</p>
                         <p className="side-item-value">
-                          {{ home: '家でできる', nearby: '近所で完結', anywhere: 'どこでもOK' }[profile.difficulty.movementCost]}
+                          {MOVEMENT_LABEL[profile.difficulty.movementCost]}
                         </p>
                       </div>
                     </div>
@@ -197,7 +207,7 @@ export default function App() {
                       <div>
                         <p className="side-item-label">心理的ハードル</p>
                         <p className="side-item-value">
-                          {{ solo: '一人でできる', courage: '少し勇気がいる', social: '知らない人が関わる' }[profile.difficulty.psychologicalBarrier]}
+                          {BARRIER_LABEL[profile.difficulty.psychologicalBarrier]}
                         </p>
                       </div>
                     </div>

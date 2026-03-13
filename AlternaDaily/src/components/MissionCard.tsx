@@ -1,3 +1,4 @@
+import type React from 'react';
 import type { Mission, MissionCategory } from '../types/mission';
 
 const CATEGORY_LABEL: Record<MissionCategory, string> = {
