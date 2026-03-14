@@ -27,3 +27,6 @@ dist-ssr
 .env
 .env.local
 .env.*.local
+
+# Androidビルド成果物（APIキーが埋め込まれたJSを含むため除外）
+android/

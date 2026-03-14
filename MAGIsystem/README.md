@@ -179,6 +179,99 @@ pnpm preview   # プロダクションビルドのプレビュー
 
 ---
 
+## Androidアプリ化（Capacitor）
+
+Web版のビルド成果物をそのままAndroid APKに変換できます。
+
+### 前提条件
+
+- [Android Studio](https://developer.android.com/studio) がインストール済みであること
+- `.env` に `VITE_GEMINI_API_KEY` が設定済みであること
+
+### ⚠️ APIキーについて
+
+ViteはビルドするときにAPIキーをJSファイルへ**直接埋め込みます**。  
+そのため生成されたAPKにはAPIキーが含まれます。  
+APKは**信頼できる相手にのみ配布**してください。  
+不特定多数への配布時はAPIキーをローテーションするか、プロキシサーバー経由の構成に変更してください。
+
+### ⚠️ `android/` フォルダについて
+
+`android/` はCapacitorが自動生成するフォルダで、APKのビルド成果物（APIキー埋め込み済みのJSを含む）が入るため `.gitignore` で除外しています。  
+`package.json` と `capacitor.config.ts` があれば下記手順でいつでも再生成できます。
+
+### 手順
+
+#### 1. 依存パッケージのインストール（初回のみ）
+
+```bash
+pnpm install
+```
+
+#### 2. Capacitorの初期化（初回のみ）
+
+```bash
+npx cap init MAGIsystem com.example.magisystem --web-dir dist
+npx cap add android
+```
+
+#### 3. ビルド → Androidプロジェクトへ同期
+
+```bash
+pnpm build
+npx cap sync
+```
+
+#### 4. Android Studioで開く
+
+```bash
+npx cap open android
+```
+
+#### 5. AGPバージョンの修正（初回のみ・Android Studioのバージョンによって必要）
+
+Android Studioを開いたときに以下のエラーが出た場合：
+
+```
+The project is using an incompatible version (AGP X.X.X) of the Android Gradle plugin.
+Latest supported version is AGP 8.10.1
+```
+
+`android/build.gradle` の該当行を修正してください：
+
+```groovy
+// 修正前
+classpath 'com.android.tools.build:gradle:X.X.X'
+// 修正後
+classpath 'com.android.tools.build:gradle:8.10.1'
+```
+
+修正後、Android Studioで **File → Sync Project with Gradle Files** を実行してください。
+
+#### 6. APKのビルド
+
+Android Studioのメニューから：
+
+**Build → Generate App Bundles or APKs → Generate APKs**
+
+完了すると `android/app/build/outputs/apk/debug/app-debug.apk` が生成されます。
+
+#### 7. スマホへのインストール
+
+1. `app-debug.apk` をGoogleドライブにアップロードしてスマホからダウンロード（または USBで転送）
+2. スマホの「提供元不明のアプリ」を許可してインストール
+
+#### コードを更新した場合
+
+```bash
+pnpm build
+npx cap sync
+```
+
+その後Android Studioで再度 **Generate APKs** を実行してください。
+
+---
+
 ## 注意事項
 
 - 人格プロファイルはブラウザの `localStorage` に保存されます。ブラウザのデータを消去すると失われます。

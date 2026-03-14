@@ -51,7 +51,7 @@ export default function SelectScreen({ onSelect, onBack }: Props) {
       <div style={{ flex: 1, display: 'flex' }}>
 
         {/* 左: プロファイル一覧 */}
-        <div style={{ width: '320px', borderRight: `1px solid ${C.border}`, display: 'flex', flexDirection: 'column', flexShrink: 0 }}>
+        <div className="select-sidebar" style={{ width: '320px', borderRight: `1px solid ${C.border}`, display: 'flex', flexDirection: 'column', flexShrink: 0 }}>
           <div style={{ padding: '20px 24px 12px', borderBottom: `1px solid ${C.border}` }}>
             <div style={{ color: C.dim, fontSize: '11px', letterSpacing: '0.2em' }}>SAVED PROFILES</div>
             <div style={{ color: '#333', fontSize: '11px', marginTop: '4px' }}>{sets.length} RECORD{sets.length !== 1 ? 'S' : ''} FOUND</div>
@@ -90,7 +90,7 @@ export default function SelectScreen({ onSelect, onBack }: Props) {
         </div>
 
         {/* 右: 詳細プレビュー */}
-        <div style={{ flex: 1, padding: '32px', display: 'flex', flexDirection: 'column' }}>
+        <div className="select-main" style={{ flex: 1, padding: '32px', display: 'flex', flexDirection: 'column' }}>
           {selected ? (
             <>
               <div style={{ marginBottom: '32px' }}>

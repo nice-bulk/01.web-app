@@ -91,9 +91,9 @@ export default function InitializationScreen({ personalities, onComplete }: Prop
         <div style={{ color: C.red, fontSize: '11px' }}>CLASSIFIED</div>
       </div>
 
-      <div style={{ flex: 1, display: 'flex', flexDirection: 'row' }}>
+      <div className="init-body" style={{ flex: 1, display: 'flex', flexDirection: 'row' }}>
         {/* Left log */}
-        <div style={{ width: '320px', borderRight: `1px solid ${C.border}`, padding: '24px', flexShrink: 0 }}>
+        <div className="init-sidebar" style={{ width: '320px', borderRight: `1px solid ${C.border}`, padding: '24px', flexShrink: 0 }}>
           <div style={{ color: C.dim, fontSize: '11px', letterSpacing: '0.2em', marginBottom: '16px' }}>ANALYSIS LOG</div>
           {statusLines.map((line, i) => {
             const safeL = line ?? ''
@@ -112,7 +112,7 @@ export default function InitializationScreen({ personalities, onComplete }: Prop
         </div>
 
         {/* Right: cards */}
-        <div style={{ flex: 1, padding: '32px', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+        <div className="init-main" style={{ flex: 1, padding: '32px', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
           {personalities.length === 0 ? (
             <div style={{ textAlign: 'center' }}>
               <div style={{ color: C.orange, fontSize: '13px', letterSpacing: '0.2em' }}>GENERATING PERSONALITY MATRIX...</div>

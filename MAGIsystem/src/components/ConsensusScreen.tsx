@@ -80,7 +80,7 @@ export default function ConsensusScreen({ agenda, personalities, onReset }: Prop
     <div style={{ minHeight: '100vh', background: C.bg, display: 'flex', flexDirection: 'column', fontFamily: C.font }}>
 
       {/* ── Header ── */}
-      <div style={{ borderBottom: `1px solid ${C.border}`, padding: '16px 32px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+      <div className="screen-header" style={{ borderBottom: `1px solid ${C.border}`, padding: '16px 32px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <div style={{ color: C.orange, fontSize: '13px', letterSpacing: '0.2em' }}>MAGI SYSTEM</div>
         <div style={{ color: C.dim, fontSize: '11px' }}>CONSENSUS // PHASE 4</div>
         <div style={{ color: C.red, fontSize: '11px' }}>
@@ -107,7 +107,7 @@ export default function ConsensusScreen({ agenda, personalities, onReset }: Prop
               <div style={{ color: C.dim, fontSize: '11px', letterSpacing: '0.2em', marginBottom: '4px' }}>
                 MAGI CONSENSUS RESULT // {finalResult.summaryCode}
               </div>
-              <div style={{
+              <div className="verdict-title" style={{
                 color: finalColor, fontSize: '36px', fontFamily: C.serif,
                 letterSpacing: '0.1em', textShadow: `0 0 30px ${finalColor}`,
               }}>
@@ -168,7 +168,7 @@ export default function ConsensusScreen({ agenda, personalities, onReset }: Prop
       )}
 
       {/* ── 3 パネル（下部）── */}
-      <div style={{ flex: 1, display: 'flex', minHeight: 0 }}>
+      <div className="magi-panels" style={{ flex: 1, display: 'flex', minHeight: 0 }}>
         {magiStates.map((state, i) => {
           const color = PERSONA_COLORS[i] ?? C.orange
           const p = personalities[i]

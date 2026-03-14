@@ -48,7 +48,7 @@ export default function HomeScreen({ onNewTest, onSelectSaved }: Props) {
       </div>
 
       {/* 選択肢 */}
-      <div style={{ display: 'flex', gap: '32px', flexWrap: 'wrap', justifyContent: 'center' }}>
+      <div className="home-choices" style={{ display: 'flex', gap: '32px', flexWrap: 'wrap', justifyContent: 'center' }}>
 
         {/* 1. 適性試験 */}
         <button

@@ -215,6 +215,118 @@ input[type="text"]:focus, textarea:focus {
   );
 }
 
+/* ========================================
+   スマホ対応レスポンシブ (max-width: 600px)
+   ======================================== */
+@media (max-width: 600px) {
+
+  /* ── 共通ヘッダー ── */
+  .screen-header {
+    padding: 12px 12px !important;
+    font-size: 10px !important;
+  }
+  .screen-header > * {
+    font-size: 10px !important;
+  }
+
+  /* ── HomeScreen ── */
+  .home-choices {
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 16px !important;
+    padding: 0 16px !important;
+    width: 100% !important;
+  }
+  .home-choices button {
+    width: 100% !important;
+    max-width: 360px !important;
+    padding: 20px 16px !important;
+    clip-path: none !important;
+  }
+
+  /* ── AgendaScreen ── */
+  .agenda-body {
+    flex-direction: column !important;
+  }
+  .agenda-sidebar {
+    width: 100% !important;
+    border-right: none !important;
+    border-bottom: 1px solid #1a1a1a !important;
+    padding: 16px !important;
+    flex-direction: row !important;
+    flex-wrap: wrap !important;
+    gap: 8px !important;
+  }
+  .agenda-sidebar > div {
+    flex: 1 1 calc(33% - 8px) !important;
+    min-width: 90px !important;
+    padding: 10px !important;
+  }
+  .agenda-main {
+    padding: 20px 16px !important;
+    align-items: stretch !important;
+  }
+  .agenda-main > div {
+    max-width: 100% !important;
+  }
+
+  /* ── InitializationScreen ── */
+  .init-body {
+    flex-direction: column !important;
+  }
+  .init-sidebar {
+    width: 100% !important;
+    border-right: none !important;
+    border-bottom: 1px solid #1a1a1a !important;
+    padding: 16px !important;
+    max-height: 180px !important;
+    overflow-y: auto !important;
+  }
+  .init-main {
+    padding: 20px 16px !important;
+  }
+
+  /* ── SelectScreen ── */
+  .select-sidebar {
+    width: 100% !important;
+    max-height: 200px !important;
+    border-right: none !important;
+    border-bottom: 1px solid #1a1a1a !important;
+    flex-shrink: 0 !important;
+  }
+  .select-main {
+    padding: 16px !important;
+    overflow-y: auto !important;
+  }
+  /* SelectScreenの横並びボタンを縦に */
+  .select-main > div:last-of-type {
+    flex-direction: column !important;
+    gap: 8px !important;
+  }
+  .select-main button {
+    clip-path: none !important;
+    padding: 12px 16px !important;
+    width: 100% !important;
+  }
+
+  /* ── ConsensusScreen ── */
+  .magi-panels {
+    flex-direction: column !important;
+  }
+  .magi-panels > div {
+    border-right: none !important;
+    border-bottom: 1px solid #1a1a1a !important;
+  }
+  .verdict-title {
+    font-size: 22px !important;
+  }
+
+  /* ── 共通ボタン ── */
+  button {
+    clip-path: none !important;
+  }
+}
+
 /* scrollbar */
 ::-webkit-scrollbar {
   width: 4px;

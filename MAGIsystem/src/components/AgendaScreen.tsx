@@ -30,9 +30,9 @@ export default function AgendaScreen({ personalities, onSubmit }: Props) {
         <div style={{ color: C.red, fontSize: '11px' }}>CLASSIFIED</div>
       </div>
 
-      <div style={{ flex: 1, display: 'flex' }}>
+      <div className="agenda-body" style={{ flex: 1, display: 'flex' }}>
         {/* Left: MAGI status */}
-        <div style={{ width: '280px', borderRight: `1px solid ${C.border}`, padding: '24px', flexShrink: 0, display: 'flex', flexDirection: 'column', gap: '16px' }}>
+        <div className="agenda-sidebar" style={{ width: '280px', borderRight: `1px solid ${C.border}`, padding: '24px', flexShrink: 0, display: 'flex', flexDirection: 'column', gap: '16px' }}>
           <div style={{ color: C.dim, fontSize: '11px', letterSpacing: '0.2em' }}>MAGI STATUS</div>
           {personalities.map((p, i) => {
             const color = PERSONA_COLORS[i] ?? C.orange
@@ -51,7 +51,7 @@ export default function AgendaScreen({ personalities, onSubmit }: Props) {
         </div>
 
         {/* Right: input */}
-        <div style={{ flex: 1, padding: '48px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <div className="agenda-main" style={{ flex: 1, padding: '48px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
           <div style={{ width: '100%', maxWidth: '600px' }}>
             <div style={{ color: C.orange, fontSize: '11px', letterSpacing: '0.3em', marginBottom: '8px' }}>AGENDA INPUT</div>
             <div style={{ fontSize: '20px', fontFamily: C.serif, color: C.bright, marginBottom: '32px', lineHeight: 1.6 }}>
