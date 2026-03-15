@@ -76,7 +76,6 @@ export default function NoteMode({ onBack }: Props) {
 
         <Piano
           clef={clef}
-          mode={noteMode}
           selected={selected}
           answered={!!answer}
           correctNotes={answer ? answer.expectedNotes : []}

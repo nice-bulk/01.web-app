@@ -4,7 +4,6 @@ import styles from './Piano.module.css'
 
 interface Props {
   clef: Clef
-  mode: 'single' | 'chord'
   selected: Note[]
   answered: boolean
   correctNotes: Note[]
@@ -17,9 +16,8 @@ function noteId(note: Note): string {
   return `${note.name}${note.octave}`
 }
 
-export default function Piano({ clef, mode, selected, answered, correctNotes, onPress }: Props) {
+export default function Piano({ clef, selected, answered, correctNotes, onPress }: Props) {
   const notePool = clef === 'treble' ? TREBLE_NOTES : BASS_NOTES
-
   const octaves = [...new Set(notePool.map(n => n.octave))].sort()
 
   const WHITE_KEY_W = 36
@@ -61,7 +59,6 @@ export default function Piano({ clef, mode, selected, answered, correctNotes, on
         )
       }
 
-      // 黒鍵（視覚のみ、クリック不可）
       const hasBlack: Record<string, boolean> = { C: true, D: true, F: true, G: true, A: true }
       if (hasBlack[name]) {
         const bx = whiteIndex * WHITE_KEY_W + WHITE_KEY_W - BLACK_KEY_W / 2
