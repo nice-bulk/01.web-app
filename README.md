@@ -6,13 +6,13 @@
 
 ## プロジェクト一覧
 
-| プロジェクト | 説明 |
-|---|---|
-| [MAGI SYSTEM](./MAGIsystem) | エヴァンゲリオンのMAGIシステムを模した、AI合議型意思決定Webアプリ |
-| [NewPick](./NewPick) | 日本株 ポテンシャル分析ツール。銘柄コード・銘柄名から同業界ランキングや類似銘柄をAIが分析 |
-| [MachiPlan](./MachiPlan) | 日本国内 AIかんたん観光プランナー。町名と予算を入力するだけで一日の観光プランを自動生成・PDF出力 |
-| [AlternaDaily](./AlternaDaily) | 「一日一変」デイリーミッションアプリ。趣味趣向と難易度設定をもとにGemini AIが毎日ひとつのミッションを提案 |
-| [PianoDrill](./PianoDrill) | 音符やキー（調）を瞬時に当てられるようになるためのピアノ練習Webアプリ。Note Mode・Key Modeの2モードを搭載 |
+| プロジェクト | 説明 | |
+|---|---|---|
+| [MAGI SYSTEM](./MAGIsystem) | エヴァンゲリオンのMAGIシステムを模した、AI合議型意思決定Webアプリ | [デモ](https://magisystem-seven.vercel.app/) |
+| [NewPick](./NewPick) | 日本株 ポテンシャル分析ツール。銘柄コード・銘柄名から同業界ランキングや類似銘柄をAIが分析 | [デモ](https://newpick-seven.vercel.app/) |
+| [MachiPlan](./MachiPlan) | 日本国内 AIかんたん観光プランナー。町名と予算を入力するだけで一日の観光プランを自動生成・PDF出力 | [デモ](https://machiplan.vercel.app/) |
+| [AlternaDaily](./AlternaDaily) | 「一日一変」デイリーミッションアプリ。趣味趣向と難易度設定をもとにGemini AIが毎日ひとつのミッションを提案 | [デモ](https://alternadaily.vercel.app/) |
+| [PianoDrill](./PianoDrill) | 音符やキー（調）を瞬時に当てられるようになるためのピアノ練習Webアプリ。Note Mode・Key Modeの2モードを搭載 | [デモ](https://pianodrill.vercel.app/) |
 
 ---
 
@@ -134,7 +134,7 @@ pnpm install
 pnpm dev
 ```
 
-> **AlternaDaily・MachiPlan・NewPick は Gemini APIキーが必要です。**  
+> **AlternaDaily・MachiPlan・NewPick・MAGIsystem は Gemini APIキーが必要です。**  
 > [Google AI Studio](https://aistudio.google.com/app/apikey) で無料取得後、`.env` に設定してください。  
 > APIキーなしでもデモモードで動作します。
 
@@ -155,6 +155,7 @@ npm run dev
 |---|---|
 | フロントエンド | React 19 + TypeScript + Vite |
 | パッケージマネージャ | pnpm |
+| ホスティング | Vercel |
 | コーディング環境 | Claude Desktop + Serena MCP |
 
 ## プロジェクト固有の技術
@@ -165,3 +166,4 @@ npm run dev
 | AlternaDaily | Google Gemini API・デモモード対応 |
 | NewPick | Express + yahoo-finance2（株価取得バックエンド）・Gemini API |
 | MachiPlan | html2canvas + jsPDF（PDF出力）・Gemini API |
+| MAGIsystem | Gemini API・Tailwind CSS・localStorage・Capacitor（Android APK対応） |
