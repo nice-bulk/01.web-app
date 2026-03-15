@@ -3,7 +3,7 @@ import { useNoteQuestion } from '../../hooks/useNoteQuestion'
 import Staff from './Staff'
 import Piano from './Piano'
 import styles from './NoteMode.module.css'
-import type { Clef } from '../../types/music'
+import type { Clef, Note } from '../../types/music'
 
 interface Props {
   onBack: () => void
@@ -18,7 +18,7 @@ export default function NoteMode({ onBack }: Props) {
     checkSingle, confirmChord, toggleNote, nextQuestion,
   } = useNoteQuestion(clef)
 
-  function handlePianoPress(note: import('../../types/music').Note) {
+  function handlePianoPress(note: Note) {
     if (answer) return
     if (noteMode === 'single') {
       checkSingle(note)
