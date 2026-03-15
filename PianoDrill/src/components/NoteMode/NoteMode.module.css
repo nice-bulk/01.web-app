@@ -1,0 +1,170 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* 上：五線譜エリア */
+.questionArea {
+  position: relative;
+  flex: 0 0 52vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  background: #1a1a2e;
+  overflow: hidden;
+  padding: 4.5rem 2rem 2rem;
+}
+
+.questionArea::before {
+  content: '𝄞 ♩ ♪ ♫ ♬ 𝄢 ♩ ♪ ♫ ♬ 𝄞 ♩ ♪ ♫ ♬ 𝄞 ♩ ♪ ♫ ♬ 𝄢';
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 4.5rem;
+  letter-spacing: 0.3rem;
+  color: rgba(255,255,255,0.045);
+  word-break: break-all;
+  line-height: 1.5;
+  padding: 1rem;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1.25rem;
+  z-index: 10;
+}
+
+.back {
+  background: none;
+  border: none;
+  color: #7eb8ff;
+  cursor: pointer;
+  font-size: 0.9rem;
+  padding: 0.2rem 0.4rem;
+}
+
+.back:hover { text-decoration: underline; }
+
+.title {
+  font-size: 1.3rem;
+  margin: 0;
+  color: rgba(255,255,255,0.85);
+  margin-right: auto;
+}
+
+.settings {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.toggle {
+  display: flex;
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 0.4rem;
+  overflow: hidden;
+}
+
+.toggle button {
+  background: transparent;
+  border: none;
+  color: rgba(255,255,255,0.5);
+  padding: 0.3rem 0.7rem;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+
+.toggle button:hover {
+  background: rgba(255,255,255,0.1);
+  color: rgba(255,255,255,0.8);
+}
+
+.toggle button.active {
+  background: rgba(255,255,255,0.2);
+  color: white;
+  font-weight: 600;
+}
+
+.prompt {
+  font-size: 1.4rem;
+  color: rgba(255,255,255,0.7);
+  margin: 0;
+  font-weight: 500;
+}
+
+.staffBox {
+  border-radius: 1rem;
+  padding: 1.25rem 2rem;
+  background: rgba(255,255,255,0.97);
+  box-shadow: 0 8px 40px rgba(0,0,0,0.5);
+  width: min(640px, 92vw);
+  display: flex;
+  justify-content: center;
+}
+
+/* 下：鍵盤エリア */
+.answerArea {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding: 1.25rem 1rem 1.5rem;
+  background: #f8f9fa;
+}
+
+.feedback {
+  font-size: 1.05rem;
+  font-weight: 600;
+  padding: 0.6rem 2rem;
+  border-radius: 0.5rem;
+  min-width: 260px;
+  text-align: center;
+}
+
+.correct {
+  background: #d4edda;
+  color: #155724;
+}
+
+.wrong {
+  background: #f8d7da;
+  color: #721c24;
+}
+
+.next, .confirm {
+  padding: 0.65rem 2rem;
+  border: none;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.next {
+  background: #4f8ef7;
+  color: white;
+}
+
+.next:hover { background: #3a7be0; }
+
+.confirm {
+  background: #10b981;
+  color: white;
+}
+
+.confirm:hover { background: #059669; }

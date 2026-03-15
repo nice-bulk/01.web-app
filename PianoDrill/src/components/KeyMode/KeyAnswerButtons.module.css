@@ -1,0 +1,46 @@
+.wrapper {
+  width: 100%;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.6rem;
+  width: 100%;
+}
+
+/* 最後の行（15個目=13〜15番目）を中央に */
+.btn:nth-child(13) { grid-column: 1; }
+.btn:nth-child(14) { grid-column: 2; }
+.btn:nth-child(15) { grid-column: 3; }
+
+.btn {
+  padding: 0.65rem 0.5rem;
+  border: 2px solid #d0d0d0;
+  border-radius: 0.5rem;
+  background: white;
+  cursor: pointer;
+  font-size: 0.95rem;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.btn:hover:not(:disabled) {
+  border-color: #4f8ef7;
+  background: #f0f6ff;
+}
+
+.btn:disabled {
+  cursor: default;
+}
+
+.correct {
+  background: #d4edda !important;
+  border-color: #28a745 !important;
+  color: #155724;
+}
+
+.wrong {
+  background: #f8d7da !important;
+  border-color: #dc3545 !important;
+  color: #721c24;
+}

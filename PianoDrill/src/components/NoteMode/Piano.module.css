@@ -1,0 +1,38 @@
+.wrapper {
+  width: 100%;
+  overflow-x: auto;
+  padding: 0.5rem 0;
+  display: flex;
+  justify-content: center;
+}
+
+.whiteKey {
+  fill: white;
+  stroke: #999;
+  stroke-width: 1;
+  cursor: pointer;
+  transition: fill 0.1s;
+}
+
+.whiteKey:hover {
+  fill: #e8f0fe;
+}
+
+.blackKey {
+  fill: #222;
+  stroke: #000;
+  stroke-width: 1;
+  pointer-events: none;
+}
+
+.selected {
+  fill: #93c5fd !important;
+}
+
+.correct {
+  fill: #86efac !important;
+}
+
+.wrong {
+  fill: #fca5a5 !important;
+}
