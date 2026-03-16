@@ -1,0 +1,207 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* 上：レーンエリア */
+.laneArea {
+  position: relative;
+  flex: 0 0 54vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  background: #1a1a2e;
+  overflow: hidden;
+  padding: 4.5rem 2rem 2rem;
+}
+
+.laneArea::before {
+  content: '𝄞 ♩ ♪ ♫ ♬ 𝄢 ♩ ♪ ♫ ♬ 𝄞 ♩ ♪ ♫ ♬';
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 4.5rem;
+  letter-spacing: 0.3rem;
+  color: rgba(255,255,255,0.03);
+  word-break: break-all;
+  line-height: 1.5;
+  padding: 1rem;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1.25rem;
+  z-index: 10;
+}
+
+.back {
+  background: none;
+  border: none;
+  color: #7eb8ff;
+  cursor: pointer;
+  font-size: 0.9rem;
+  padding: 0.2rem 0.4rem;
+}
+.back:hover { text-decoration: underline; }
+
+.title {
+  font-size: 1.3rem;
+  margin: 0;
+  color: rgba(255,255,255,0.85);
+}
+
+.songSelect {
+  margin-left: auto;
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 0.4rem;
+  color: white;
+  padding: 0.3rem 0.6rem;
+  font-size: 0.85rem;
+  cursor: pointer;
+  outline: none;
+}
+
+.songSelect option {
+  background: #1a1a2e;
+  color: white;
+}
+
+.songSelect:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+/* 難易度トグル */
+.diffToggle {
+  display: flex;
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 0.4rem;
+  overflow: hidden;
+}
+
+.diffDisabled {
+  opacity: 0.45;
+  pointer-events: none;
+}
+
+.diffBtn {
+  background: transparent;
+  border: none;
+  color: rgba(255,255,255,0.5);
+  padding: 0.28rem 0.65rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+  white-space: nowrap;
+}
+
+.diffBtn:hover {
+  background: rgba(255,255,255,0.08);
+  color: rgba(255,255,255,0.85);
+}
+
+/* 難易度ごとのアクティブ色 */
+.diffBtn.easy.diffActive   { background: #10b981; color: white; }
+.diffBtn.normal.diffActive { background: #4f8ef7; color: white; }
+.diffBtn.hard.diffActive   { background: #ef4444; color: white; }
+
+/* BPM バッジ */
+.bpmBadge {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: rgba(255,255,255,0.45);
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+
+.combo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 0.75rem;
+}
+
+.comboNum {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #fbbf24;
+  line-height: 1;
+}
+
+.comboLabel {
+  font-size: 0.6rem;
+  color: rgba(255,255,255,0.5);
+  letter-spacing: 0.1em;
+}
+
+.laneBox {
+  width: min(860px, 94vw);
+}
+
+/* カウントダウン */
+.countdown {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0,0,0,0.45);
+  z-index: 20;
+}
+
+.countNum {
+  font-size: 7rem;
+  font-weight: 900;
+  color: white;
+  animation: popCount 0.9s ease forwards;
+  display: block;
+}
+
+@keyframes popCount {
+  0%   { transform: scale(1.4); opacity: 0; }
+  30%  { transform: scale(1.0); opacity: 1; }
+  70%  { transform: scale(1.0); opacity: 1; }
+  100% { transform: scale(0.7); opacity: 0; }
+}
+
+/* スタートボタン */
+.startBtn {
+  padding: 0.85rem 3rem;
+  background: #4f8ef7;
+  color: white;
+  border: none;
+  border-radius: 0.6rem;
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s;
+}
+.startBtn:hover {
+  background: #3a7be0;
+  transform: scale(1.03);
+}
+
+/* 下：鍵盤エリア */
+.pianoArea {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  background: #f0f2f5;
+}

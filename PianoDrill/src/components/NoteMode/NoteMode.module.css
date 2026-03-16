@@ -168,3 +168,51 @@
 }
 
 .confirm:hover { background: #059669; }
+
+/* タイムアタック */
+.timerBtn {
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.25);
+  border-radius: 0.4rem;
+  color: rgba(255,255,255,0.5);
+  font-size: 1rem;
+  padding: 0.25rem 0.5rem;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+
+.timerBtn:hover {
+  background: rgba(255,255,255,0.1);
+  color: rgba(255,255,255,0.85);
+}
+
+.timerActive {
+  background: rgba(255,200,50,0.2) !important;
+  border-color: #fbbf24 !important;
+  color: #fbbf24 !important;
+}
+
+.timerBarWrap {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 0 1rem 0.5rem;
+}
+
+.startTimer {
+  padding: 0.85rem 2.5rem;
+  background: #fbbf24;
+  color: #1a1a2e;
+  border: none;
+  border-radius: 0.6rem;
+  font-size: 1.05rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s;
+}
+
+.startTimer:hover {
+  background: #f59e0b;
+  transform: scale(1.03);
+}

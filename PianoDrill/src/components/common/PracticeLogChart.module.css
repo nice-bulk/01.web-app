@@ -1,0 +1,84 @@
+.wrapper {
+  width: 100%;
+  max-width: 480px;
+}
+
+.heading {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #444;
+  margin: 0 0 0.75rem;
+  text-align: center;
+}
+
+.chart {
+  display: flex;
+  align-items: flex-end;
+  gap: 0.5rem;
+  height: 120px;
+  padding-bottom: 2rem; /* date label space */
+  position: relative;
+}
+
+.col {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  position: relative;
+}
+
+.barWrap {
+  flex: 1;
+  width: 100%;
+  display: flex;
+  align-items: flex-end;
+}
+
+.bar {
+  width: 100%;
+  background: linear-gradient(to top, #4f8ef7, #7eb8ff);
+  border-radius: 4px 4px 0 0;
+  position: relative;
+  min-height: 4px;
+  transition: height 0.4s ease;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.barLabel {
+  font-size: 0.6rem;
+  font-weight: 700;
+  color: white;
+  margin-top: 3px;
+  white-space: nowrap;
+}
+
+.dateLabel {
+  font-size: 0.65rem;
+  color: #888;
+  margin-top: 4px;
+  white-space: nowrap;
+}
+
+.totalLabel {
+  font-size: 0.6rem;
+  color: #aaa;
+  white-space: nowrap;
+}
+
+.empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 2rem;
+  color: #aaa;
+  font-size: 0.9rem;
+}
+
+.empty span {
+  font-size: 2rem;
+}

@@ -12,7 +12,7 @@
 | [NewPick](./NewPick) | 日本株 ポテンシャル分析ツール。銘柄コード・銘柄名から同業界ランキングや類似銘柄をAIが分析 | [デモ](https://newpick-seven.vercel.app/) |
 | [MachiPlan](./MachiPlan) | 日本国内 AIかんたん観光プランナー。町名と予算を入力するだけで一日の観光プランを自動生成・PDF出力 | [デモ](https://machiplan.vercel.app/) |
 | [AlternaDaily](./AlternaDaily) | 「一日一変」デイリーミッションアプリ。趣味趣向と難易度設定をもとにGemini AIが毎日ひとつのミッションを提案 | [デモ](https://alternadaily.vercel.app/) |
-| [PianoDrill](./PianoDrill) | 音符やキー（調）を瞬時に当てられるようになるためのピアノ練習Webアプリ。Note Mode・Key Modeの2モードを搭載 | [デモ](https://pianodrill.vercel.app/) |
+| [PianoDrill](./PianoDrill) | 音符やキー（調）を瞬時に当てられるようになるためのピアノ練習Webアプリ。Note Mode・Key Mode・Play Modeの3モードを搭載 | [デモ](https://pianodrill.vercel.app/) |
 
 ---
 

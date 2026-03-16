@@ -6,6 +6,38 @@
   min-height: 100vh;
   gap: 2rem;
   padding: 2rem;
+  position: relative;
+}
+
+.langToggle {
+  position: absolute;
+  top: 1.25rem;
+  right: 1.25rem;
+  display: flex;
+  border: 1px solid #ddd;
+  border-radius: 0.4rem;
+  overflow: hidden;
+}
+
+.langToggle button {
+  background: white;
+  border: none;
+  padding: 0.3rem 0.7rem;
+  font-size: 0.8rem;
+  color: #888;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+
+.langToggle button:hover {
+  background: #f0f0f0;
+  color: #444;
+}
+
+.langActive {
+  background: #1a1a2e !important;
+  color: white !important;
+  font-weight: 600;
 }
 
 .title {

@@ -1,15 +1,18 @@
 import { KEY_SIGNATURES } from '../../data/music'
 import type { KeyModeTarget } from '../../hooks/useKeyQuestion'
+import type { Lang } from '../../context/AppContext'
+import { localizeKey } from '../../utils/localize'
 import styles from './KeyAnswerButtons.module.css'
 
 interface Props {
   target: KeyModeTarget
+  lang: Lang
   onAnswer: (key: string) => void
   correctKey: string
   selectedKey: string | null
 }
 
-export default function KeyAnswerButtons({ target, onAnswer, correctKey, selectedKey }: Props) {
+export default function KeyAnswerButtons({ target, lang, onAnswer, correctKey, selectedKey }: Props) {
   const keys =
     target === 'major' ? KEY_SIGNATURES.map(k => k.majorKey)
     : target === 'minor' ? KEY_SIGNATURES.map(k => k.minorKey)
@@ -31,7 +34,7 @@ export default function KeyAnswerButtons({ target, onAnswer, correctKey, selecte
               onClick={() => onAnswer(key)}
               disabled={!!selectedKey}
             >
-              {key}
+              {localizeKey(key, lang)}
             </button>
           )
         })}

@@ -2,7 +2,23 @@ export type Clef = 'treble' | 'bass'
 export type Accidental = 'sharp' | 'flat' | 'natural'
 export type NoteName = 'C' | 'D' | 'E' | 'F' | 'G' | 'A' | 'B'
 export type NoteMode = 'single' | 'chord'
-export type AppMode = 'select' | 'note' | 'key'
+export type AppMode = 'select' | 'note' | 'key' | 'play'
+
+// ── Play Mode ──────────────────────────────────────────────────
+export interface SongNote {
+  note: string    // 'C4', 'D4' など
+  beat: number    // 拍の位置（0.0, 0.5, 1.0 ...）
+  duration: number // 拍数（四分音符=1, 二分音符=2）
+}
+
+export interface Song {
+  id: string
+  title: string
+  bpm: number
+  notes: SongNote[]
+}
+
+export type Judgment = 'perfect' | 'good' | 'miss' | 'none'
 
 export interface Note {
   name: NoteName

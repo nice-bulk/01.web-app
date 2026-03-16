@@ -68,7 +68,7 @@ export default function KeySignatureDisplay({ keySignature, width = 560, height 
 
       {/* ト音記号 */}
       <text
-        x={10} y={STAFF_TOP + STAFF_HEIGHT + 8}
+        x={10} y={STAFF_TOP + STAFF_HEIGHT - LINE_SPACING + 8}
         fontSize={72} fontFamily="serif" fill="#222"
       >
         𝄞

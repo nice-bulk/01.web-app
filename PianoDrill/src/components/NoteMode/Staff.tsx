@@ -117,7 +117,7 @@ export default function Staff({ clef, keySignature, notes, width = 560, height =
         />
       ))}
       {clef === 'treble' ? (
-        <text x={10} y={STAFF_TOP + STAFF_HEIGHT + 8} fontSize={72} fontFamily="serif" fill="#222">𝄞</text>
+        <text x={10} y={STAFF_TOP + STAFF_HEIGHT - LINE_SPACING + 8} fontSize={72} fontFamily="serif" fill="#222">𝄞</text>
       ) : (
         <text x={10} y={STAFF_TOP + LINE_SPACING + 4} fontSize={40} fontFamily="serif" fill="#222">𝄢</text>
       )}

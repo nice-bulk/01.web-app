@@ -1,0 +1,101 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.modal {
+  background: white;
+  border-radius: 1.25rem;
+  padding: 2.5rem 3rem;
+  text-align: center;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  animation: slideUp 0.25s ease;
+  min-width: 300px;
+}
+
+@keyframes slideUp {
+  from { transform: translateY(30px); opacity: 0; }
+  to   { transform: translateY(0);    opacity: 1; }
+}
+
+.title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin: 0 0 0.5rem;
+}
+
+.message {
+  font-size: 1.1rem;
+  color: #555;
+  margin: 0 0 1.75rem;
+}
+
+.stats {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+}
+
+.statValue {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #1a1a2e;
+  line-height: 1;
+}
+
+.statLabel {
+  font-size: 0.75rem;
+  color: #888;
+}
+
+.actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.restart {
+  padding: 0.75rem 2rem;
+  background: #4f8ef7;
+  color: white;
+  border: none;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.restart:hover { background: #3a7be0; }
+
+.back {
+  padding: 0.6rem 2rem;
+  background: none;
+  color: #888;
+  border: 1px solid #ddd;
+  border-radius: 0.5rem;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: border-color 0.2s, color 0.2s;
+}
+
+.back:hover { border-color: #aaa; color: #555; }
