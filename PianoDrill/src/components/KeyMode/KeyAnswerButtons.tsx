@@ -1,19 +1,24 @@
 import { KEY_SIGNATURES } from '../../data/music'
+import type { KeyModeTarget } from '../../hooks/useKeyQuestion'
 import styles from './KeyAnswerButtons.module.css'
 
 interface Props {
+  target: KeyModeTarget
   onAnswer: (key: string) => void
   correctKey: string
   selectedKey: string | null
 }
 
-export default function KeyAnswerButtons({ onAnswer, correctKey, selectedKey }: Props) {
-  const majorKeys = KEY_SIGNATURES.map(k => k.majorKey)
+export default function KeyAnswerButtons({ target, onAnswer, correctKey, selectedKey }: Props) {
+  const keys =
+    target === 'major' ? KEY_SIGNATURES.map(k => k.majorKey)
+    : target === 'minor' ? KEY_SIGNATURES.map(k => k.minorKey)
+    : [...KEY_SIGNATURES.map(k => k.majorKey), ...KEY_SIGNATURES.map(k => k.minorKey)]
 
   return (
     <div className={styles.wrapper}>
-      <div className={styles.grid}>
-        {majorKeys.map(key => {
+      <div className={`${styles.grid} ${target === 'both' ? styles.wide : ''}`}>
+        {keys.map(key => {
           let state: 'default' | 'correct' | 'wrong' = 'default'
           if (selectedKey) {
             if (key === correctKey) state = 'correct'

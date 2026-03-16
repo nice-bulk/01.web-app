@@ -1,7 +1,10 @@
 import { useState } from 'react'
 import { useNoteQuestion } from '../../hooks/useNoteQuestion'
+import { useScore } from '../../hooks/useScore'
+import { useSound } from '../../hooks/useSound'
 import Staff from './Staff'
 import Piano from './Piano'
+import ScoreBoard from '../common/ScoreBoard'
 import styles from './NoteMode.module.css'
 import type { Clef, Note } from '../../types/music'
 
@@ -18,13 +21,24 @@ export default function NoteMode({ onBack }: Props) {
     checkSingle, confirmChord, toggleNote, nextQuestion,
   } = useNoteQuestion(clef)
 
+  const { score, accuracy, recordAnswer } = useScore()
+  const { playCorrect, playWrong } = useSound()
+
   function handlePianoPress(note: Note) {
     if (answer) return
     if (noteMode === 'single') {
-      checkSingle(note)
+      const isCorrect = checkSingle(note)
+      recordAnswer(isCorrect)
+      if (isCorrect) playCorrect(); else playWrong()
     } else {
       toggleNote(note)
     }
+  }
+
+  function handleConfirmChord() {
+    const isCorrect = confirmChord(selected)
+    recordAnswer(isCorrect)
+    if (isCorrect) playCorrect(); else playWrong()
   }
 
   return (
@@ -52,6 +66,7 @@ export default function NoteMode({ onBack }: Props) {
                 onClick={() => setNoteMode('chord')}>和音</button>
             </div>
           </div>
+          <ScoreBoard score={score} accuracy={accuracy} />
         </header>
 
         <p className={styles.prompt}>この音符は？</p>
@@ -85,7 +100,7 @@ export default function NoteMode({ onBack }: Props) {
         {answer ? (
           <button className={styles.next} onClick={nextQuestion}>次の問題 →</button>
         ) : noteMode === 'chord' && selected.length > 0 ? (
-          <button className={styles.confirm} onClick={confirmChord}>確定</button>
+          <button className={styles.confirm} onClick={handleConfirmChord}>確定</button>
         ) : null}
       </div>
     </div>

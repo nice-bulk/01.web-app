@@ -1,6 +1,6 @@
 # 🎹 PianoDrill
 
-音符やキー（調）を瞬時に当てられるようになるための、ピアノ練習用Webアプリです。
+音符やキー（調）を瞬時に当てられるようになるための、ピアノ練習用 Web アプリです。
 
 🌐 **デモサイト**: https://pianodrill.vercel.app/
 
@@ -12,11 +12,15 @@
 - 単音 / 和音モードの切り替えに対応
 - 調号（♯・♭）付きの問題に対応
 - 正解・不正解を鍵盤のカラーハイライトでフィードバック
+- 正解音・不正解音のサウンドフィードバック（Web Audio API）
+- 正解率・連続正解・問題数をリアルタイム表示
 
 ### Key Mode（キーあてモード）
-- 五線譜上の調号だけを見て、何長調かをボタンで回答
-- 長調15調（C Major 〜 Cb Major）に対応
-- ランダム出題
+- 五線譜上の調号だけを見て、何調かをボタンで回答
+- **長調 / 短調 / 両方** の切り替えに対応（全15調 × 2）
+- 正解音・不正解音のサウンドフィードバック（Web Audio API）
+- 正解率・連続正解・問題数をリアルタイム表示
+- 5連続正解で 🔥 表示
 
 ## Tech Stack
 
@@ -27,6 +31,7 @@
 | ビルドツール | Vite 8 |
 | パッケージマネージャ | pnpm |
 | スタイリング | CSS Modules |
+| サウンド | Web Audio API（外部ライブラリなし） |
 | ホスティング | Vercel |
 
 ## 開発環境のセットアップ
@@ -62,21 +67,26 @@ pnpm lint
 ```
 src/
 ├── types/
-│   └── music.ts              # 共通型定義
+│   └── music.ts                  # 共通型定義
 ├── data/
-│   └── music.ts              # 音楽データ定数（調号・音域など）
+│   └── music.ts                  # 音楽データ定数（調号・音域など）
 ├── hooks/
-│   ├── useKeyQuestion.ts     # Key Mode 出題ロジック
-│   └── useNoteQuestion.ts    # Note Mode 出題ロジック
+│   ├── useKeyQuestion.ts         # Key Mode 出題ロジック（長調/短調/両方対応）
+│   ├── useNoteQuestion.ts        # Note Mode 出題ロジック
+│   ├── useScore.ts               # スコア管理（正解率・連続正解）
+│   └── useSound.ts               # サウンドフィードバック（Web Audio API）
 └── components/
-    ├── ModeSelect/           # モード選択画面
-    ├── KeyMode/              # Key Mode 画面
-    └── NoteMode/             # Note Mode 画面（五線譜・仮想鍵盤）
+    ├── common/
+    │   └── ScoreBoard/           # スコア表示コンポーネント
+    ├── ModeSelect/               # モード選択画面
+    ├── KeyMode/                  # Key Mode 画面
+    └── NoteMode/                 # Note Mode 画面（五線譜・仮想鍵盤）
 ```
 
 ## 今後の予定
 
-- [ ] 短調（平行調）対応 — Key Mode に短調を追加
-- [ ] スコア・正解率の記録
 - [ ] MIDIキーボード入力対応（WebMIDI API）
+- [ ] 和音モードの出題
+- [ ] タイマーモード
+- [ ] 弱点（間違いの多い調・音符）のハイライト表示
 - [ ] スマホ対応レイアウトの改善

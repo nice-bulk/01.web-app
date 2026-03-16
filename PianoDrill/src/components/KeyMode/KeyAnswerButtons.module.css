@@ -10,9 +10,15 @@
 }
 
 /* 最後の行（15個目=13〜15番目）を中央に */
-.btn:nth-child(13) { grid-column: 1; }
-.btn:nth-child(14) { grid-column: 2; }
-.btn:nth-child(15) { grid-column: 3; }
+/* 長調15個：最後の行を中央に */
+.grid:not(.wide) .btn:nth-child(13) { grid-column: 1; }
+.grid:not(.wide) .btn:nth-child(14) { grid-column: 2; }
+.grid:not(.wide) .btn:nth-child(15) { grid-column: 3; }
+
+/* both: 長調+短調 30個を5列で並べる */
+.wide {
+  grid-template-columns: repeat(6, 1fr);
+}
 
 .btn {
   padding: 0.65rem 0.5rem;

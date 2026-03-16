@@ -28,22 +28,24 @@ export function useNoteQuestion(clef: Clef = 'treble') {
     })
   }, [])
 
-  // 単音モード：即時判定
-  const checkSingle = useCallback((note: Note) => {
+  /** 単音モード：即時判定。正誤を返す */
+  const checkSingle = useCallback((note: Note): boolean => {
     const expected = question.notes[0]
     const correct = note.name === expected.name && note.octave === expected.octave
     setAnswer({ correct, expectedNotes: question.notes })
     setSelected([note])
+    return correct
   }, [question])
 
-  // 和音モード：確定ボタン
-  const confirmChord = useCallback(() => {
+  /** 和音モード：確定ボタン。正誤を返す */
+  const confirmChord = useCallback((currentSelected: Note[]): boolean => {
     const expected = question.notes
     const correct =
-      selected.length === expected.length &&
-      expected.every(en => selected.some(s => s.name === en.name && s.octave === en.octave))
+      currentSelected.length === expected.length &&
+      expected.every(en => currentSelected.some(s => s.name === en.name && s.octave === en.octave))
     setAnswer({ correct, expectedNotes: expected })
-  }, [question, selected])
+    return correct
+  }, [question])
 
   const nextQuestion = useCallback(() => {
     setQuestion(generateQuestion(clef))

@@ -1,0 +1,50 @@
+.board {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 0.6rem;
+  padding: 0.35rem 0.75rem;
+  backdrop-filter: blur(6px);
+}
+
+.item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 0.75rem;
+  min-width: 52px;
+}
+
+.label {
+  font-size: 0.65rem;
+  color: rgba(255, 255, 255, 0.5);
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+}
+
+.value {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.9);
+  line-height: 1.3;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.value.hot {
+  color: #fbbf24;
+}
+
+.fire {
+  font-size: 0.85rem;
+}
+
+.divider {
+  width: 1px;
+  height: 2rem;
+  background: rgba(255, 255, 255, 0.15);
+  flex-shrink: 0;
+}
