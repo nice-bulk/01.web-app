@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { usePlayMode } from '../../hooks/usePlayMode'
 import { useSound } from '../../hooks/useSound'
 import { useLang } from '../../context/AppContext'
@@ -18,6 +18,14 @@ const DIFF_RATIO: Record<Difficulty, number> = {
   easy:   0.6,
   normal: 1.0,
   hard:   1.3,
+}
+
+// PCキーボード → 音名マッピング（白鍵のみ、2オクターブ）
+// A S D F G H J  = C4 D4 E4 F4 G4 A4 B4
+// K L ; ' Z X C  = C5 D5 E5 F5 G5 A5 B5
+const KEY_MAP: Record<string, string> = {
+  a: 'C4', s: 'D4', d: 'E4', f: 'F4', g: 'G4', h: 'A4', j: 'B4',
+  k: 'C5', l: 'D5', ';': 'E5', "'": 'F5', z: 'G5', x: 'A5', c: 'B5',
 }
 
 const DIFF_LABEL: Record<Difficulty, Record<'en' | 'ja', string>> = {
@@ -42,13 +50,52 @@ export default function PlayMode({ onBack }: Props) {
   } = usePlayMode(song, bpm)
 
   // 視覚的なキーハイライト（短時間表示）
-  const activeTimers = useRef<Map<string, ReturnType<typeof setTimeout>>>(new Map())
+  const activeTimers  = useRef<Map<string, ReturnType<typeof setTimeout>>>(new Map())
+  // 押しっぱなし防止
+  const pressedKeys   = useRef<Set<string>>(new Set())
 
-  function handleKeyPress(noteStr: string) {
+  // PCキーボードイベント
+  useEffect(() => {
+    function onKeyDown(e: KeyboardEvent) {
+      // 入力フォーカス中は無視
+      if (e.target instanceof HTMLSelectElement) return
+      if (pressedKeys.current.has(e.key)) return  // 押しっぱなし無視
+      pressedKeys.current.add(e.key)
+
+      const noteStr = KEY_MAP[e.key.toLowerCase()]
+      if (noteStr) handleKeyPress.current(noteStr)
+    }
+    function onKeyUp(e: KeyboardEvent) {
+      pressedKeys.current.delete(e.key)
+    }
+    window.addEventListener('keydown', onKeyDown)
+    window.addEventListener('keyup', onKeyUp)
+    return () => {
+      window.removeEventListener('keydown', onKeyDown)
+      window.removeEventListener('keyup', onKeyUp)
+    }
+  }, [phase])
+
+  const handleKeyPress = useRef((noteStr: string) => {
     playPianoNote(noteStr)
     pressNote(noteStr)
-
-    // ハイライト
+    setActiveNotes(prev => new Set([...prev, noteStr]))
+    if (activeTimers.current.has(noteStr)) {
+      clearTimeout(activeTimers.current.get(noteStr)!)
+    }
+    const t = setTimeout(() => {
+      setActiveNotes(prev => {
+        const next = new Set(prev)
+        next.delete(noteStr)
+        return next
+      })
+    }, 150)
+    activeTimers.current.set(noteStr, t)
+  })
+  // 最新の pressNote / playPianoNote を参照できるよう毎回更新
+  handleKeyPress.current = (noteStr: string) => {
+    playPianoNote(noteStr)
+    pressNote(noteStr)
     setActiveNotes(prev => new Set([...prev, noteStr]))
     if (activeTimers.current.has(noteStr)) {
       clearTimeout(activeTimers.current.get(noteStr)!)
@@ -162,7 +209,7 @@ export default function PlayMode({ onBack }: Props) {
       {/* 下：鍵盤 */}
       <div className={styles.pianoArea}>
         <PlayPiano
-          onPress={handleKeyPress}
+          onPress={handleKeyPress.current}
           activeNotes={activeNotes}
         />
       </div>

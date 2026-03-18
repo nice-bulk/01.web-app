@@ -2,13 +2,18 @@ import styles from './PlayPiano.module.css'
 
 interface Props {
   onPress: (note: string) => void
-  activeNotes: Set<string>  // 現在押されているキー（視覚的ハイライト用）
+  activeNotes: Set<string>
 }
 
 const WHITE_NAMES = ['C', 'D', 'E', 'F', 'G', 'A', 'B']
-// Play Mode は C4〜B5 の2オクターブ
-const OCTAVES = [4, 5]
+const OCTAVES     = [4, 5]
 const HAS_BLACK: Record<string, boolean> = { C: true, D: true, F: true, G: true, A: true }
+
+// 白鍵の順番にキーラベルを割り当て
+const KEY_LABELS: Record<string, string> = {
+  C4: 'A', D4: 'S', E4: 'D', F4: 'F', G4: 'G', A4: 'H', B4: 'J',
+  C5: 'K', D5: 'L', E5: ';', F5: "'", G5: 'Z', A5: 'X', B5: 'C',
+}
 
 const WHITE_W = 40
 const WHITE_H = 110
@@ -22,9 +27,10 @@ export default function PlayPiano({ onPress, activeNotes }: Props) {
 
   for (const octave of OCTAVES) {
     for (const name of WHITE_NAMES) {
-      const noteStr = `${name}${octave}`
-      const x       = wi * WHITE_W
-      const active  = activeNotes.has(noteStr)
+      const noteStr  = `${name}${octave}`
+      const x        = wi * WHITE_W
+      const active   = activeNotes.has(noteStr)
+      const keyLabel = KEY_LABELS[noteStr]
 
       whiteKeys.push(
         <g key={noteStr} onClick={() => onPress(noteStr)} style={{ cursor: 'pointer' }}>
@@ -32,24 +38,30 @@ export default function PlayPiano({ onPress, activeNotes }: Props) {
             x={x} y={0} width={WHITE_W - 1} height={WHITE_H} rx={3}
             className={`${styles.whiteKey} ${active ? styles.whiteActive : ''}`}
           />
-          <text
-            x={x + WHITE_W / 2} y={WHITE_H - 10}
+          {/* 音名 */}
+          <text x={x + WHITE_W / 2} y={WHITE_H - 22}
             textAnchor="middle" fontSize={9}
-            className={styles.keyLabel}
+            className={styles.noteLabel}
           >
-            {name}{octave}
+            {noteStr}
+          </text>
+          {/* キーボードラベル */}
+          <text x={x + WHITE_W / 2} y={WHITE_H - 8}
+            textAnchor="middle" fontSize={10} fontWeight="bold"
+            className={`${styles.keyLabel} ${active ? styles.keyLabelActive : ''}`}
+          >
+            {keyLabel}
           </text>
         </g>
       )
 
       if (HAS_BLACK[name]) {
-        const bx      = x + WHITE_W - BLACK_W / 2
-        const bNote   = `${name}#${octave}`
-        const bActive = activeNotes.has(bNote)
+        const bx    = x + WHITE_W - BLACK_W / 2
+        const bNote = `${name}#${octave}`
         blackKeys.push(
           <rect key={bNote}
             x={bx} y={0} width={BLACK_W} height={BLACK_H} rx={2}
-            className={`${styles.blackKey} ${bActive ? styles.blackActive : ''}`}
+            className={styles.blackKey}
           />
         )
       }

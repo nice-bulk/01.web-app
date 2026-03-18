@@ -8,12 +8,16 @@
 
 .whiteKey {
   fill: white;
-  stroke: #999;
+  stroke: #bbb;
   stroke-width: 1;
-  transition: fill 0.08s;
+  transition: fill 0.07s;
 }
 
-.whiteKey:hover, .whiteActive {
+.whiteKey:hover {
+  fill: #e8f0fe;
+}
+
+.whiteActive {
   fill: #bfdbfe !important;
 }
 
@@ -24,12 +28,19 @@
   pointer-events: none;
 }
 
-.blackActive {
-  fill: #3b82f6 !important;
+.noteLabel {
+  fill: #bbb;
+  pointer-events: none;
+  user-select: none;
 }
 
 .keyLabel {
-  fill: #aaa;
+  fill: #999;
   pointer-events: none;
   user-select: none;
+  font-family: monospace;
+}
+
+.keyLabelActive {
+  fill: #3b82f6;
 }
