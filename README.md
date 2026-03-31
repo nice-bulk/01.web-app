@@ -13,6 +13,7 @@
 | [MachiPlan](./MachiPlan) | 日本国内 AIかんたん観光プランナー。町名と予算を入力するだけで一日の観光プランを自動生成・PDF出力 | [デモ](https://machiplan.vercel.app/) |
 | [AlternaDaily](./AlternaDaily) | 「一日一変」デイリーミッションアプリ。趣味趣向と難易度設定をもとにGemini AIが毎日ひとつのミッションを提案 | [デモ](https://alternadaily.vercel.app/) |
 | [PianoDrill](./PianoDrill) | 音符やキー（調）を瞬時に当てられるようになるためのピアノ練習Webアプリ。Note Mode・Key Mode・Play Modeの3モードを搭載 | [デモ](https://pianodrill.vercel.app/) |
+| [KimochiMusic](./KimochiMusic) | 日本語の感情タグを選ぶと、その気分にぴったりの邦楽・アニメOSTを1曲提案するWebアプリ。AIなし・手動キュレーション | |
 
 ---
 
@@ -125,7 +126,7 @@ serenaを使って C:\Users\yourname\app-dev\my-app を開いて
 
 各プロジェクトをクローン後、以下の手順で起動できます。
 ```bash
-cd PianoDrill  # または AlternaDaily, NewPick, MachiPlan, MAGIsystem
+cd PianoDrill  # または AlternaDaily, NewPick, MachiPlan, MAGIsystem, KimochiMusic
 
 # 依存関係インストール
 pnpm install
@@ -167,3 +168,4 @@ npm run dev
 | NewPick | Express + yahoo-finance2（株価取得バックエンド）・Gemini API |
 | MachiPlan | html2canvas + jsPDF（PDF出力）・Gemini API |
 | MAGIsystem | Gemini API・Tailwind CSS・localStorage・Capacitor（Android APK対応） |
+| KimochiMusic | AIなし・手動キュレーションJSON・Web Share API |
