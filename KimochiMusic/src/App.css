@@ -1,0 +1,248 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: #0a0a0f;
+  color: #e8e8f0;
+  font-family: 'Hiragino Sans', 'Yu Gothic', 'Meiryo', sans-serif;
+  min-height: 100vh;
+}
+
+.app {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 48px 24px 80px;
+}
+
+/* Header */
+.header {
+  text-align: center;
+  margin-bottom: 48px;
+}
+
+.app-title {
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: #ffffff;
+}
+
+.app-subtitle {
+  margin-top: 8px;
+  font-size: 0.9rem;
+  color: #888899;
+  letter-spacing: 0.1em;
+}
+
+/* Instruction */
+.instruction {
+  text-align: center;
+  font-size: 0.95rem;
+  color: #888899;
+  margin-bottom: 32px;
+  letter-spacing: 0.08em;
+}
+
+/* Tag Selector */
+.tag-selector {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.tag-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.tag-category-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  opacity: 0.85;
+}
+
+.tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tag-btn {
+  background: transparent;
+  border: 1px solid #333344;
+  color: #aaaacc;
+  padding: 8px 16px;
+  border-radius: 999px;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: border-color 0.2s, color 0.2s, background 0.2s;
+  font-family: inherit;
+  letter-spacing: 0.03em;
+}
+
+.tag-btn:hover {
+  border-color: #666677;
+  color: #e8e8f0;
+}
+
+.tag-btn.active {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+/* Song Card */
+.song-card {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  animation: fadeIn 0.4s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.looped-notice {
+  text-align: center;
+  font-size: 0.8rem;
+  color: #666677;
+  letter-spacing: 0.05em;
+}
+
+.song-info {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 40px 24px 32px;
+  border: 1px solid #222233;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.song-title {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: 0.03em;
+}
+
+.song-artist {
+  font-size: 1rem;
+  color: #888899;
+}
+
+.song-reason {
+  margin-top: 8px;
+  margin-bottom: 16px;
+  font-size: 0.9rem;
+  color: #aaaacc;
+  line-height: 1.7;
+  font-style: italic;
+}
+
+.link-btn {
+  padding: 10px 28px;
+  border-radius: 999px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: opacity 0.2s;
+  letter-spacing: 0.05em;
+}
+
+.link-btn:hover {
+  opacity: 0.8;
+}
+
+.link-btn.youtube {
+  background: #ff3c3c;
+  color: #fff;
+}
+
+.link-btn.spotify {
+  background: #1db954;
+  color: #fff;
+}
+
+/* Actions */
+.song-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.another-btn {
+  background: transparent;
+  border: 1px solid #444455;
+  color: #e8e8f0;
+  padding: 12px 48px;
+  border-radius: 999px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s;
+  font-family: inherit;
+  width: 100%;
+  max-width: 280px;
+}
+
+.another-btn:hover {
+  border-color: #888899;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.song-sub-actions {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
+.share-btn {
+  background: transparent;
+  border: none;
+  color: #666677;
+  padding: 6px 8px;
+  font-size: 0.8rem;
+  cursor: pointer;
+  font-family: inherit;
+  transition: color 0.2s;
+}
+
+.share-btn:hover {
+  color: #aaaacc;
+}
+
+.reset-btn {
+  background: transparent;
+  border: none;
+  color: #555566;
+  padding: 6px 8px;
+  font-size: 0.8rem;
+  cursor: pointer;
+  font-family: inherit;
+  transition: color 0.2s;
+}
+
+.reset-btn:hover {
+  color: #888899;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .app {
+    padding: 32px 16px 60px;
+  }
+  .app-title {
+    font-size: 1.5rem;
+  }
+  .song-title {
+    font-size: 1.3rem;
+  }
+}
